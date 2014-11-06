@@ -1,0 +1,26 @@
+{% load staticfiles %}
+<html>
+	<head>
+		<title>{% block title %}Início{% endblock %}</title>
+	</head>
+	<link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/bootstrap.min.css'%}">
+	<body>
+		<nav class="navbar navbar-default" role="navigation">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+						<span class="sr-only">Toggle navigation</span>
+					</button>
+					<a class="navbar-brand" href="{% url 'index' %}">Início</a>
+				</div>
+				<div class="collapse navbar-collapse">
+					<ul class="nav navbar-nav">
+						<li><a href="{% url 'empresa_list' %}">Listagem de Empresas</a></li>
+						<li><a href="{% url 'categoria_list' %}">Listagem de Categorias de Empresas</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		{% block content %}Olá Mundo!!!{% endblock %}
+	</body>
+</html>

@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Listagem
+{% endblock %}
+
+{% block content %}
+<a href="{% url 'empresa_form' %}" class="btn btn-primary">Nova Empresa</a>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>empresa</th>
+            <th style="width: 60px;">deletar</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for empresa in object_list %}
+        <tr>
+            <td><a href="{% url 'empresa_form' empresa.pk %}">{{ empresa.nome }}</a></td>
+            <td>
+                <a href="{% url 'empresa_delete' empresa.pk %}" class="btn btn-small btn-danger">
+                    X
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+</div>
+{% endblock %}
