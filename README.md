@@ -38,7 +38,7 @@ Abra o CMD
 
 vá na pasta onde se encontra o arquivo e execute:
 
-```
+```bash
 python ez_setup.py
 ```
 
@@ -56,7 +56,7 @@ Descompacte o Django em qualquer pasta
 
 Abra o CMD entre na pasta descompactada do Django e execute:
 
-```
+```bash
 python setup.py install
 ```
 zzzzZZzzzz
@@ -71,7 +71,7 @@ Execute os mesmo passos para que foram feitos para executar o python ao path, ma
 
 para testar se funcionou tente executar no CMD:
 
-```
+```bash
 django-admin
 ```
 
@@ -81,7 +81,7 @@ Testar se Funcionou
 
 Execute no CMD o python e tente importar o django
 
-```
+```python
 import django
 ```
 
@@ -92,13 +92,13 @@ Criar o Projeto
 Crie uma pasta em `C:\` com o nome `django_contatos`
 
 Abra o CMD e entre na pasta `cd C:\django_contatos` e execute:
-```
+```bash
 django-admin startproject contatos
 ```
 
 Para testar se o projeto esta funcionando entre na pasta `contatos` entro da pasta `django_contatos` pelo CMD e execute:
 
-```
+```python
 python manage.py runserver
 ```
 
@@ -107,7 +107,7 @@ Criar a app Principal do Sistema
 
 No CMD entre na pasta `C:\django_contatos\contatos\contatos` e execute:
 
-```
+```bash
 django-admin startapp core
 ```
 
@@ -119,7 +119,7 @@ Definir os Modelos
 
 Abra o aquivo `models.py` e crie os Modelos:
 
-```
+```python
 class CategoriaEmpresa(models.Model):
     categoria = models.CharField(max_length=100)
 
@@ -148,7 +148,7 @@ class Empresa(models.Model):
 
 No CMD vá até a raiz do projeto (pasta onde está o arquivo `manage.py`) e execute:
 
-```
+```python
 python manage.py syncdb
 ```
 
@@ -156,7 +156,7 @@ Ele irá perguntar se deseja criar um usuário digite: `yes`
 
 
 Verficar se criou um arquivo chamado db.sqlite3 - Banco de dados, o nome é o definido na seguinte configuração do settings.py:
-```
+```python
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -170,7 +170,7 @@ Criando a Primeira View
 
 Abra o arquivo `views.py` e crie as Views:
 
-```
+```python
 # coding: utf-8
 from django.views.generic import TemplateView
 
@@ -181,7 +181,7 @@ Criando as URLs
 =============
 
 Abra o arquivo `urls.py` e deixe-o igual a este:
-```
+```python
 from django.conf.urls import patterns, url
 
 
@@ -195,7 +195,7 @@ Criando o Template Inicial
 ==========================
 
 Na pasta `core` crie uma pasta chamada `templates` e dentro dela um arquivo chamado `index.html` com o conteúdo:
-```
+```html
 <html>
     <head>
         <title>Início</title>
@@ -207,7 +207,7 @@ Na pasta `core` crie uma pasta chamada `templates` e dentro dela um arquivo cham
 ```
 
 Com um editor de texto adicione no `settings.py`:
-```
+```python
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
@@ -218,7 +218,7 @@ Criando as views para a Categoria de Empresa
 =====================================
 
 Adicione ao arquivo `views.py`
-```
+```python
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
 from django.core.urlresolvers import reverse_lazy
@@ -252,7 +252,7 @@ Criando as URLS para a Categoria de Empresa
 =====================================
 
 Adicione ao arquivo `urls.py` as urls:
-```
+```python
 # Categoria
 url(r'^list/categoria/$', 'contatos.core.views.categoria_list', name="categoria_list"),
 url(r'^create/categoria/$', 'contatos.core.views.categoria_create', name="categoria_form"),
@@ -264,7 +264,7 @@ Criando os Templates de Categoria de Empresa
 ======================================
 
 Na pasta `templates` cria um arquivo chamado `confirm_delete.html`:
-```
+```html
 <html>
     <head>
         <title>Deletar</title>
@@ -282,7 +282,7 @@ Na pasta `templates` cria um arquivo chamado `confirm_delete.html`:
 
 Na pasta `templates` cria uma pasta chamada `core` dentro dela crie os arquivos:
 `categoriaempresa_form.html`
-```
+```html
 <html>
     <head>
         <title>Formulário</title>
@@ -305,7 +305,7 @@ Na pasta `templates` cria uma pasta chamada `core` dentro dela crie os arquivos:
 </html>
 ```
 `categoriaempresa_list.html`
-```
+```html
 <html>
     <head>
         <title>Listagem</title>
@@ -357,7 +357,7 @@ Editar o Formulário da Empresa
 ==========================
 
 Na pasta `core` crie um arquivo chamado `forms.py` com o conteúdo:
-```
+```python
 # coding: utf-8
 
 from django import forms
@@ -376,7 +376,7 @@ class EmpresaForm(forms.ModelForm):
 ```
 
 No arquivo `views.py` importe o formulário recém criado:
-```
+```python
 from contatos.core.forms import EmpresaForm
 ```
 
@@ -386,7 +386,7 @@ Deixando as Coisas Bonitas
 ======================
 
 Na pasta `templates` crie um arquivo chamado `base.html` com o conteúdo:
-```
+```html
 {% load staticfiles %}
 <html>
     <head>
@@ -398,13 +398,13 @@ Na pasta `templates` crie um arquivo chamado `base.html` com o conteúdo:
 </html>
 ```
 Altere o conteúdo do arquivo `index.html` para:
-```
+```html
 {% extends "base.html" %}
 ```
 
 Faça o mesmo para todos os outros templates.
 Exemplo `confirm_delete.html`:
-```
+```html
 {% extends "base.html" %}
 
 {% block title %}
@@ -424,7 +424,7 @@ Dentro da Pasta `core` crie uma pasta chamda `static` com uma pasta dentro chamd
 Acesse http://bootswatch.com/flatly/bootstrap.min.css e salve o arquivo nessa pasta com o nome `bootstrap.min.css`
 
 Altere o arquivo base.html` para:
-```
+```html
 {% load staticfiles %}
 <html>
     <head>
@@ -454,13 +454,13 @@ Altere o arquivo base.html` para:
 ```
 
 Para criar botões de novo abra os templates de Listagem e adicionem um link:
-```
+```html
 <a href="{% url 'empresa_form' %}" class="btn btn-primary">Nova Empresa</a>
 ```
 Faça a mesma coisa para Categoria de Empresa
 
 Nos templates de listagem adicione as classes `"table table-bordered table-striped"` para as tabelas, ficando assim:
-```
+```html
 ...
 <table class="table table-bordered table-striped">
     ...
